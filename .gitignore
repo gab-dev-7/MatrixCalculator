@@ -1,0 +1,18 @@
+# Maven build artifacts
+target/
+pom.xml.tag
+pom.xml.versionsBackup
+pom.xml.releaseBackup
+
+# Vite/Node modules
+frontend/dist/
+frontend/node_modules/
+
+# IDE files
+.idea/
+.vscode/
+*.iml
+.DS_Store
+
+# Logs
+*.log
