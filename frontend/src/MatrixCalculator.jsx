@@ -9,6 +9,7 @@ function MatrixCalculator() {
   const [isSingleMatrixOp, setIsSingleMatrixOp] = useState(false);
   const [operation, setOperation] = useState(null);
   const [equation, setEquation] = useState('');
+  const [randomDim, setRandomDim] = useState('2 2');
 
   const singleMatrixOps = ['determinant', 'transpose', 'inverse'];
 
@@ -77,7 +78,7 @@ function MatrixCalculator() {
         matrixB: matrixB
       };
 
-      const response = await fetch(`https://matrixcalc.gawindlin.com/api/matrices/${op}`, {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/matrices/${op}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(requestBody),
@@ -126,7 +127,7 @@ function MatrixCalculator() {
         throw new Error('Invalid dimensions. Please enter positive numbers.');
       }
 
-      const response = await fetch(`https://matrixcalc.gawindlin.com/api/matrices/random?rows=${rows}&cols=${cols}`);
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/matrices/random?rows=${rows}&cols=${cols}`);
       const data = await response.json();
 
       if (!response.ok) {
@@ -185,4 +186,17 @@ function MatrixCalculator() {
           <textarea
             placeholder="Enter Matrix B (e.g., 5 6&#10;7 8)"
             value={matrixBInput}
-            onChange={(e) => setMatrixBInput(e
+            onChange={(e) => setMatrixBInput(e.target.value)}
+          />
+        </div>
+      </div>
+      <div className={`result-display ${operation ? 'show' : ''}`}>
+        <h3 className="equation-heading">{equation}</h3>
+        {error && <pre className="error">{error}</pre>}
+        {result && <pre className="result-matrix">{formatMatrixForDisplay(result)}</pre>}
+      </div>
+    </div>
+  );
+}
+
+export default MatrixCalculator;
