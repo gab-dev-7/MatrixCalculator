@@ -9,7 +9,6 @@ function MatrixCalculator() {
   const [isSingleMatrixOp, setIsSingleMatrixOp] = useState(false);
   const [operation, setOperation] = useState(null);
   const [equation, setEquation] = useState('');
-  const [randomDim, setRandomDim] = useState('2 2');
 
   const singleMatrixOps = ['determinant', 'transpose', 'inverse'];
 
@@ -78,7 +77,7 @@ function MatrixCalculator() {
         matrixB: matrixB
       };
 
-      const response = await fetch(`http://localhost:8080/api/matrices/${op}`, {
+      const response = await fetch(`https://matrixcalc.gawindlin.com/api/matrices/${op}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(requestBody),
@@ -120,17 +119,6 @@ function MatrixCalculator() {
     }
   };
 
-  const handleClear = () => {
-    setMatrixAInput('');
-    setMatrixBInput('');
-    setResult(null);
-    setError(null);
-    setOperation(null);
-    setIsSingleMatrixOp(false);
-    setEquation('');
-  };
-
-
   const handleRandom = async () => {
     try {
       const [rows, cols] = randomDim.split(' ').map(Number);
@@ -138,14 +126,13 @@ function MatrixCalculator() {
         throw new Error('Invalid dimensions. Please enter positive numbers.');
       }
 
-      const response = await fetch(`http://localhost:8080/api/matrices/random?rows=${rows}&cols=${cols}`);
+      const response = await fetch(`https://matrixcalc.gawindlin.com/api/matrices/random?rows=${rows}&cols=${cols}`);
       const data = await response.json();
 
       if (!response.ok) {
         throw new Error(data.message || 'Failed to generate random matrices.');
       }
 
-      // Update the input fields with the new random matrices
       setMatrixAInput(formatMatrixForDisplay(data.matrixA));
       setMatrixBInput(formatMatrixForDisplay(data.matrixB));
       setError(null);
@@ -157,17 +144,25 @@ function MatrixCalculator() {
     }
   };
 
+  const handleClear = () => {
+    setMatrixAInput('');
+    setMatrixBInput('');
+    setResult(null);
+    setError(null);
+    setOperation(null);
+    setIsSingleMatrixOp(false);
+    setEquation('');
+  };
+
   return (
     <div className="calculator-container">
       <h2>Matrix Calculator</h2>
       <div className="input-section">
-        <div className="matrix-a-container">
-          <textarea
-            placeholder="Enter Matrix A (e.g., 1 2&#10;3 4)"
-            value={matrixAInput}
-            onChange={(e) => setMatrixAInput(e.target.value)}
-          />
-        </div>
+        <textarea
+          placeholder="Enter Matrix A (e.g., 1 2&#10;3 4)"
+          value={matrixAInput}
+          onChange={(e) => setMatrixAInput(e.target.value)}
+        />
         <div className="operation-buttons-container">
           <button onClick={() => handleOperation('add')}>Add</button>
           <button onClick={() => handleOperation('subtract')}>Subtract</button>
@@ -190,31 +185,4 @@ function MatrixCalculator() {
           <textarea
             placeholder="Enter Matrix B (e.g., 5 6&#10;7 8)"
             value={matrixBInput}
-            onChange={(e) => setMatrixBInput(e.target.value)}
-          />
-        </div>
-      </div>
-      <div className={`result-display ${operation ? 'show' : ''}`}>
-        <h3 className="equation-heading">{equation}</h3>
-        {error && <pre className="error">{error}</pre>}
-        {result && <pre className="result-matrix">{formatMatrixForDisplay(result)}</pre>}
-      </div>
-
-      <footer className="footer-credentials">
-        <p>
-          Built by Gabriel
-        </p>
-        <div className="social-links">
-          <a href="https://github.com/gab-dev-7" target="_blank" rel="noopener noreferrer">
-            GitHub
-          </a>
-          <a href="https://instagram.com/gaabriel__7" target="_blank" rel="noopener noreferrer">
-            Instagram
-          </a>
-        </div>
-      </footer>
-    </div>
-  );
-}
-
-export default MatrixCalculator;
+            onChange={(e) => setMatrixBInput(e
