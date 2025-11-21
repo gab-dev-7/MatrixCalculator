@@ -78,7 +78,7 @@ function MatrixCalculator() {
         matrixB: matrixB
       };
 
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/matrices/${op}`, {
+      const response = await fetch(`${import.meta.env.VITE_APP_API_URL}/api/matrices/${op}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(requestBody),
@@ -127,7 +127,7 @@ function MatrixCalculator() {
         throw new Error('Invalid dimensions. Please enter positive numbers.');
       }
 
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/matrices/random?rows=${rows}&cols=${cols}`);
+      const response = await fetch(`${import.meta.env.VITE_APP_API_URL}/api/matrices/random?rows=${rows}&cols=${cols}`);
       const data = await response.json();
 
       if (!response.ok) {
