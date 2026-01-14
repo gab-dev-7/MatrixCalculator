@@ -1,16 +1,12 @@
-
 package com.matrixcalculator.matrixCalculatorAPI;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/matrices")
+@CrossOrigin
 public class MatrixController {
 
   @PostMapping("/add")
@@ -62,5 +58,12 @@ public class MatrixController {
     Matrix matrixA = Matrix.random(rows, cols);
     Matrix matrixB = Matrix.random(rows, cols);
     return new MatrixOperationRequest(matrixA.getData(), matrixB.getData());
+  }
+
+  @ExceptionHandler({ ArithmeticException.class, IllegalArgumentException.class })
+  public ResponseEntity<String> handleMatrixExceptions(RuntimeException ex) {
+    return ResponseEntity
+        .status(HttpStatus.BAD_REQUEST)
+        .body(ex.getMessage());
   }
 }
