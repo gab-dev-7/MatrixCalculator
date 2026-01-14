@@ -1,5 +1,7 @@
 package com.matrixcalculator.matrixCalculatorAPI;
 
+import java.util.HashMap;
+import java.util.Map;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -61,9 +63,11 @@ public class MatrixController {
   }
 
   @ExceptionHandler({ ArithmeticException.class, IllegalArgumentException.class })
-  public ResponseEntity<String> handleMatrixExceptions(RuntimeException ex) {
+  public ResponseEntity<Map<String, String>> handleMatrixExceptions(RuntimeException ex) {
+    Map<String, String> errorResponse = new HashMap<>();
+    errorResponse.put("error", ex.getMessage());
     return ResponseEntity
         .status(HttpStatus.BAD_REQUEST)
-        .body(ex.getMessage());
+        .body(errorResponse);
   }
 }
