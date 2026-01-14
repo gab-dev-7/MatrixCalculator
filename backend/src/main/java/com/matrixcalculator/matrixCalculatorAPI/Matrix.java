@@ -174,7 +174,7 @@ public class Matrix {
 
   public Matrix inverse() {
     if (this.rows != this.cols) {
-      throw new IllegalArgumentException("INverse can only be calculated for square matrices");
+      throw new IllegalArgumentException("Inverse can only be calculated for square matrices");
     }
 
     double det = this.determinant();
@@ -281,7 +281,7 @@ public class Matrix {
     Random random = new Random();
     for (int i = 0; i < rows; i++) {
       for (int j = 0; j < cols; j++) {
-        result.data[i][j] = random.nextInt(2000) - 1000;
+        result.data[i][j] = random.nextInt(1000) - 500;
       }
     }
     return result;
