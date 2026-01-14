@@ -281,7 +281,7 @@ public class Matrix {
     Random random = new Random();
     for (int i = 0; i < rows; i++) {
       for (int j = 0; j < cols; j++) {
-        result.data[i][j] = random.nextInt(1000) - 500;
+        result.data[i][j] = random.nextInt(201) - 100;
       }
     }
     return result;
