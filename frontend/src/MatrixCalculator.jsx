@@ -87,7 +87,7 @@ function MatrixCalculator() {
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.message || 'Something went wrong with the API.');
+        throw new Error(data.error || data.message || 'Something went wrong with the API.');
       }
 
       let opSymbol = '';
@@ -131,7 +131,7 @@ function MatrixCalculator() {
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.message || 'Failed to generate random matrices.');
+        throw new Error(data.error || data.message || 'Failed to generate random matrices.');
       }
 
       setMatrixAInput(formatMatrixForDisplay(data.matrixA));
