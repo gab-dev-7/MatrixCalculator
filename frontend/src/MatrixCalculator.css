@@ -222,3 +222,28 @@ textarea:focus {
     text-decoration: underline;
     transform: translateY(-2px);
 }
+
+.usage-instructions {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #30363d;
+    width: 100%;
+    color: #8b949e;
+    text-align: center;
+}
+
+.usage-instructions p {
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: #c9d1d9;
+}
+
+.usage-instructions ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    font-size: 0.9rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
