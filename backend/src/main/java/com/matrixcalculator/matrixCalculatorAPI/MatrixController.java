@@ -56,9 +56,13 @@ public class MatrixController {
   }
 
   @GetMapping("/random")
-  public MatrixOperationRequest getRandomMatrices(@RequestParam int rows, @RequestParam int cols) {
-    Matrix matrixA = Matrix.random(rows, cols);
-    Matrix matrixB = Matrix.random(rows, cols);
+  public MatrixOperationRequest getRandomMatrices(
+      @RequestParam int rows,
+      @RequestParam int cols,
+      @RequestParam(defaultValue = "-100") int min,
+      @RequestParam(defaultValue = "100") int max) {
+    Matrix matrixA = Matrix.random(rows, cols, min, max);
+    Matrix matrixB = Matrix.random(rows, cols, min, max);
     return new MatrixOperationRequest(matrixA.getData(), matrixB.getData());
   }
 

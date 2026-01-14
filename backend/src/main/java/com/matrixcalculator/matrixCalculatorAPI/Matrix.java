@@ -277,11 +277,18 @@ public class Matrix {
   }
 
   public static Matrix random(int rows, int cols) {
+    return random(rows, cols, -100, 100);
+  }
+
+  public static Matrix random(int rows, int cols, int min, int max) {
+    if (min >= max) {
+      throw new IllegalArgumentException("Min value must be less than Max value.");
+    }
     Matrix result = new Matrix(rows, cols);
     Random random = new Random();
     for (int i = 0; i < rows; i++) {
       for (int j = 0; j < cols; j++) {
-        result.data[i][j] = random.nextInt(201) - 100;
+        result.data[i][j] = random.nextInt(max - min + 1) + min;
       }
     }
     return result;

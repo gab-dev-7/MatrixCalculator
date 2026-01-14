@@ -10,6 +10,8 @@ function MatrixCalculator() {
   const [operation, setOperation] = useState(null);
   const [equation, setEquation] = useState('');
   const [randomDim, setRandomDim] = useState('2 2');
+  const [minVal, setMinVal] = useState('-10');
+  const [maxVal, setMaxVal] = useState('10');
 
   const singleMatrixOps = ['determinant', 'transpose', 'inverse'];
 
@@ -127,7 +129,18 @@ function MatrixCalculator() {
         throw new Error('Invalid dimensions. Please enter positive numbers.');
       }
 
-      const response = await fetch(`${import.meta.env.VITE_APP_API_URL}/api/matrices/random?rows=${rows}&cols=${cols}`);
+      const min = parseInt(minVal, 10);
+      const max = parseInt(maxVal, 10);
+
+      if (isNaN(min) || isNaN(max)) {
+        throw new Error('Invalid range values.');
+      }
+
+      if (min >= max) {
+        throw new Error('Min value must be less than Max value.');
+      }
+
+      const response = await fetch(`${import.meta.env.VITE_APP_API_URL}/api/matrices/random?rows=${rows}&cols=${cols}&min=${min}&max=${max}`);
       const data = await response.json();
 
       if (!response.ok) {
@@ -177,6 +190,21 @@ function MatrixCalculator() {
               placeholder="rows cols"
               value={randomDim}
               onChange={(e) => setRandomDim(e.target.value)}
+              className="dim-input"
+            />
+            <input
+              type="number"
+              placeholder="Min"
+              value={minVal}
+              onChange={(e) => setMinVal(e.target.value)}
+              className="range-input"
+            />
+            <input
+              type="number"
+              placeholder="Max"
+              value={maxVal}
+              onChange={(e) => setMaxVal(e.target.value)}
+              className="range-input"
             />
             <button onClick={handleRandom} className="random-button">Random</button>
           </div>

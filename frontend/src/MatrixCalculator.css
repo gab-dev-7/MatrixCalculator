@@ -76,15 +76,15 @@ textarea:focus {
 }
 
 .random-generator-container {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     gap: 8px;
     align-items: center;
     margin-top: 5px;
 }
 
 .random-generator-container input {
-    width: 120px;
+    width: 100%;
     text-align: center;
     padding: 10px;
     border-radius: 6px;
@@ -95,7 +95,12 @@ textarea:focus {
     font-family: 'Cascadia Code', monospace;
 }
 
+.dim-input {
+    grid-column: span 2;
+}
+
 .random-button {
+    grid-column: span 2;
     background-image: linear-gradient(180deg, #f7a300, #c78200) !important;
     color: #1e1e1e !important;
 }
