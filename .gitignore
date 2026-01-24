@@ -7,12 +7,29 @@ pom.xml.releaseBackup
 # Vite/Node modules
 frontend/dist/
 frontend/node_modules/
+frontend/.env
+frontend/.env.local
+frontend/.env.*.local
+frontend/.env.development
+frontend/.env.test
+frontend/.env.production
 
 # IDE files
 .idea/
 .vscode/
 *.iml
 .DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
 
 # Logs
+logs
 *.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
