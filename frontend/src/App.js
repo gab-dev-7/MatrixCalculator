@@ -1,4 +1,4 @@
-import './App.css';
+import "./App.css";
 
 function App() {
   return (
@@ -7,7 +7,6 @@ function App() {
         <h1>Matrix Calculator</h1>
       </header>
       <div className="container">
-
         {/* Matrix A Input */}
         <div className="matrix-section">
           <h2>Matrix A</h2>
@@ -40,7 +39,6 @@ function App() {
           <textarea readOnly rows="10" cols="50"></textarea>
         </div>
       </div>
-
     </div>
   );
 }
