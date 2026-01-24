@@ -105,9 +105,9 @@ public class Matrix {
       throw new IllegalArgumentException("#columns of the first matrix must be equal #rows of the second matrix");
     }
 
-    Matrix result = new Matrix(this.rows, this.cols);
+    Matrix result = new Matrix(this.rows, other.cols);
     for (int i = 0; i < this.rows; i++) {
-      for (int j = 0; j < this.cols; j++) {
+      for (int j = 0; j < other.cols; j++) {
         double sum = 0;
         for (int k = 0; k < this.cols; k++) {
           sum += this.data[i][k] * other.data[k][j];
